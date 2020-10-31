@@ -1,8 +1,12 @@
 package com.revature.eval.java.core;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Map;
+
 
 public class EvaluationService {
 
@@ -31,7 +35,17 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		
+		phrase = phrase.toUpperCase();
+		phrase = phrase.replace(",", "");
+		String [] acronym = phrase.split("[\\W]");
+		String newString = "";
+		
+		for(String s:acronym){
+		    newString += s.charAt(0);
+		}
+		return newString;
+	
 	}
 
 	/**
@@ -84,18 +98,28 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if ((this.sideOne == sideTwo) && (sideOne == sideThree))
+		         return true;
+		      else
+		         return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			   if (((this.sideOne == sideTwo) && (sideOne != sideThree)) ||
+				          ((sideOne == sideThree) && (sideOne != sideTwo)) ||
+				          ((sideTwo == sideThree) && (sideTwo != sideOne)))
+				         return true;
+				      else
+				         return false;
+			
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if ((this.sideOne != sideTwo) && (sideOne != sideThree) && (sideTwo != sideThree))
+		         return true;
+		      else
+		         return false;
+			
 		}
 
 	}
@@ -117,8 +141,38 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
-	}
+		
+		string = string.toUpperCase();
+		char[] scrabble = string.toCharArray();
+		int totalScore = 0;
+		
+		for(int points = 0; points < string.length(); points++) {
+			switch (scrabble[points]) {
+			case 'D' : case 'G':
+				totalScore += 2;
+				break;
+			case 'B': case 'C': case 'M': case 'P':
+				totalScore += 3;
+				break;
+			case 'F': case 'H': case 'V': case 'W': case 'Y':
+				totalScore += 4;
+				break;
+			case 'K':
+				totalScore += 5;
+				break;
+			case 'J': case 'X':
+				totalScore += 8;
+				break;
+			case 'Q': case 'Z':
+				totalScore += 10;
+				break;
+			default :
+				totalScore += 1;
+			
+						}
+		}
+		return totalScore;
+		}
 
 	/**
 	 * 5. Clean up user-entered phone numbers so that they can be sent SMS messages.
@@ -153,8 +207,15 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
-	}
+		
+		string = string.replaceAll("[^0-9+]", "");
+		String number = "";
+		
+		      	return number += string;
+		
+		
+		}
+	
 
 	/**
 	 * 6. Given a phrase, count the occurrences of each word in that phrase.
@@ -166,7 +227,9 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
+		 
+	
+			
 		return null;
 	}
 
@@ -247,8 +310,45 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		
+		string = string.toLowerCase();
+		String end = "";
+		String delims = "\\s+";
+		String[] words = string.split(delims);
+		for(int i = 0; i < words.length; i++) {
+			if (isVowel(words[i].charAt(0))) {
+				end += words[i] + "ay";
+			}
+			
+			
+				
+					else {
+		end += words[i].substring(1) + words[i].substring(0, 1) + "ay";
 	}
+			
+			
+}
+		return end;
+	}
+		public boolean isVowel(char c) {
+			if(c == 'a')
+				return true;
+			if(c == 'a')
+				return true;
+			if(c == 'e')
+				return true;
+			if(c == 'i')
+				return true;
+			if(c == 'o')
+				return true;
+			if(c == 'u')
+				return true;
+			else return false;
+			
+			
+			
+		
+		}
 
 	/**
 	 * 9. An Armstrong number is a number that is the sum of its own digits each
@@ -267,7 +367,31 @@ public class EvaluationService {
 	 */
 	public boolean isArmstrongNumber(int input) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		 
+		 int number = input;
+		 int count = 0;
+		 int rem;
+		 int number2 = input;
+		 int sum1 = 0;
+		 int orig = input;
+		 
+		 
+		while(number>0) {
+			count = count + 1;
+			number = number/10;}
+
+		while (number2 > 0) {
+		   rem = number2 % 10;
+		   sum1 += Math.pow(rem,count);
+		   number2 = Math.floorDiv(number2,10);}
+		
+		
+		if(orig == sum1)
+			return true;
+		else
+			return false;
+			
+				
 	}
 
 	/**
@@ -415,8 +539,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		
+		
+		 String str = string.toUpperCase();
+		
+		
+		
+		for(int i = 0; i < str.length(); i++);
+		if (str.contains("X"))
+			return true;
+		else
+			return false;
+	
 	}
 
 	/**
@@ -434,9 +568,13 @@ public class EvaluationService {
 	 */
 	public boolean isPangram(String string) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		String lowerSentence = string.toLowerCase();
+        for (char letter = 'a'; letter <= 'z'; letter++) {
+            if (lowerSentence.indexOf(letter) < 0) return false;
+		
 	}
-
+		return true;
+	}
 	/**
 	 * 17. Calculate the moment when someone has lived for 10^9 seconds.
 	 * 
@@ -446,10 +584,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		
+		if (given.isSupported(ChronoUnit.SECONDS)) {
+			return given.plus(1000000000, ChronoUnit.SECONDS); 
+		} else {
+				LocalDate date = LocalDate.from(given);
+				LocalDateTime dateTime = date.atStartOfDay();
+				return dateTime.plus(1000000000, ChronoUnit.SECONDS);
+		
 	}
 
+	}
 	/**
 	 * 18. Given a number, find the sum of all the unique multiples of particular
 	 * numbers up to but not including that number.
@@ -464,9 +610,21 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int sum = 0;
+		for (int j=1; j<i; j++) {
+			for(int u=0; u<set.length; u++) {
+				if((j%set[u]) == 0) {
+					sum += j;
+					break;
+					
+				}
+				
+			}
+		}
+		return sum;
 	}
+	
+	
 
 	/**
 	 * 19. Given a number determine whether or not it is valid per the Luhn formula.
@@ -537,8 +695,38 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		
+		String new_string = string.replace("?", " ?").trim();
+	    String arr[] = new_string.split(" ");
+	    
+
+	    int total = 0;
+
+
+	    String firstNumber = arr[2];
+	    String secondNumber = arr[4];
+	    
+	  
+	   int inum = Integer.valueOf(firstNumber);
+	   int inum2 = Integer.valueOf(secondNumber);
+	   
+
+	   
+
+	    if(string.contains("plus"))
+	      total += (inum + inum2);
+	    
+	    if(string.contains("minus"))
+			  total += (inum - inum2);
+	    
+	    else
+			  total += 0;
+
+	    
+	  return total;
+	    
+	  
 	}
 
 }
