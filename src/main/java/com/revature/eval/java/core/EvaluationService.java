@@ -697,36 +697,34 @@ public class EvaluationService {
 	public int solveWordProblem(String string) {
 		
 		
-		String new_string = string.replace("?", " ?").trim();
-	    String arr[] = new_string.split(" ");
+		String[] split = string.replaceAll("[^a-zA-Z0-9\\-\\s+]", "").split("\\s+");
+				
+				
+		String operation = split[3];
+		int result = 0;
+		int num1 = Integer.parseInt(split[2]);
+		
+		switch(operation) {
+		case "plus":
+			result = num1 + Integer.parseInt(split[4]);
+			break;
+		case "minus":
+			result = num1 - Integer.parseInt(split[4]);
+			break;
+		
+		case "multiplied":
+			result = num1 / Integer.parseInt(split[5]);
+			break;
+		case "divided":
+			result = num1 * Integer.parseInt(split[5]);
+			break;
+			
+		}
+		return result;
+		
+		
 	    
 
-	    int total = 0;
-
-
-	    String firstNumber = arr[2];
-	    String secondNumber = arr[4];
-	    
-	  
-	   int inum = Integer.valueOf(firstNumber);
-	   int inum2 = Integer.valueOf(secondNumber);
-	   
-
-	   
-
-	    if(string.contains("plus"))
-	      total += (inum + inum2);
-	    
-	    if(string.contains("minus"))
-			  total += (inum - inum2);
-	    
-	    else
-			  total += 0;
-
-	    
-	  return total;
-	    
-	  
-	}
+	   }
 
 }
